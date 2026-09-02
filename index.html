@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rosco - Pasapalabra</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="contenedor">
+
+    <h1>El Rosco</h1>
+
+    <div class="marcador">
+      <span id="aciertos">Aciertos: 0</span>
+      <span id="fallos">Fallos: 0</span>
+    </div>
+
+    <div class="pregunta-box">
+      <p id="pregunta">Cargando pregunta...</p>
+    </div>
+
+    <div id="rosco" class="rosco">
+      <!-- Las letras se generan dinámicamente con JS -->
+    </div>
+
+    <div class="respuesta-box">
+      <input type="text" id="respuesta" placeholder="Escribe tu respuesta aquí" autocomplete="off">
+      <button id="comprobar">Comprobar</button>
+    </div>
+
+    <p id="mensaje" class="mensaje"></p>
+
+  </div>
+
+  <div id="pantallaFinal" class="pantalla-final oculto">
+    <div class="caja-final">
+      <h2>¡Rosco completado!</h2>
+      <p id="resultadoFinal"></p>
+      <button id="reiniciar">Volver a jugar</button>
+    </div>
+  </div>
+
+<script src="script.js"></script>
+</body>
+</html>
