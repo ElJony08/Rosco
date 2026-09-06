@@ -3,6 +3,7 @@
 // ---------------------------------------------------------
 const preguntas = [
   { letra: "A", pregunta: "Con la A: Órgano que bombea la sangre por el cuerpo.", respuesta: "arteria" },
+  { letra: "B", pregunta: "Empieza por B: Instrumento musical de viento, de madera y con llaves.", respuesta: "clarinete" },
   { letra: "B", pregunta: "Con la B: Recipiente pequeño donde se guardan joyas.", respuesta: "bandeja" },
   { letra: "C", pregunta: "Empieza por C: Capital de Francia.", respuesta: "paris" },
   { letra: "D", pregunta: "Con la D: Figura geométrica de cuatro lados iguales y ángulos rectos.", respuesta: "diamante" },
@@ -58,12 +59,30 @@ function normalizar(texto) {
 }
 
 // ---------------------------------------------------------
+// Calcula el tamaño del rosco según el ancho de pantalla,
+// para que se vea bien tanto en móvil como en escritorio.
+// ---------------------------------------------------------
+function calcularTamanoRosco() {
+  const anchoDisponible = Math.min(window.innerWidth * 0.92, 420);
+  const tamano = Math.max(anchoDisponible, 260); // nunca demasiado pequeño
+
+  const tamanoLetra = tamano < 320 ? 32 : (tamano < 380 ? 38 : 42);
+
+  document.documentElement.style.setProperty("--rosco-size", tamano + "px");
+  document.documentElement.style.setProperty("--letra-size", tamanoLetra + "px");
+
+  return { tamano, tamanoLetra };
+}
+
+// ---------------------------------------------------------
 // Genera el rosco de letras colocadas en círculo
 // ---------------------------------------------------------
 function generarRosco() {
   const total = preguntas.length;
-  const radio = 190;
-  const centro = 210;
+  const { tamano, tamanoLetra } = calcularTamanoRosco();
+  const centro = tamano / 2;
+  // el radio deja hueco suficiente para que la letra no se salga del círculo
+  const radio = centro - tamanoLetra / 2 - 4;
 
   preguntas.forEach((item, i) => {
     const angulo = (i / total) * 2 * Math.PI - Math.PI / 2; // empieza arriba
@@ -80,6 +99,34 @@ function generarRosco() {
     roscoEl.appendChild(div);
   });
 }
+
+// ---------------------------------------------------------
+// Recoloca las letras si cambia el tamaño de pantalla
+// (por ejemplo al girar el móvil)
+// ---------------------------------------------------------
+function reposicionarRosco() {
+  const total = preguntas.length;
+  const { tamano, tamanoLetra } = calcularTamanoRosco();
+  const centro = tamano / 2;
+  const radio = centro - tamanoLetra / 2 - 4;
+
+  for (let i = 0; i < total; i++) {
+    const angulo = (i / total) * 2 * Math.PI - Math.PI / 2;
+    const x = centro + radio * Math.cos(angulo);
+    const y = centro + radio * Math.sin(angulo);
+    const el = document.getElementById("letra-" + i);
+    if (el) {
+      el.style.left = x + "px";
+      el.style.top = y + "px";
+    }
+  }
+}
+
+let resizeTimeout;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(reposicionarRosco, 150);
+});
 
 // ---------------------------------------------------------
 // Marca visualmente la letra actual
