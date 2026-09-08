@@ -2,34 +2,23 @@
 // Preguntas del rosco (letra, pregunta, respuesta correcta)
 // ---------------------------------------------------------
 const preguntas = [
-  { letra: "A", pregunta: "Con la A: Órgano que bombea la sangre por el cuerpo.", respuesta: "arteria" },
+  { letra: "A", pregunta: "Con la A: Voz que puso Beñat en Calpe", respuesta: "Anas" },
   { letra: "B", pregunta: "Empieza por B: Instrumento musical de viento, de madera y con llaves.", respuesta: "clarinete" },
-  { letra: "B", pregunta: "Con la B: Recipiente pequeño donde se guardan joyas.", respuesta: "bandeja" },
-  { letra: "C", pregunta: "Empieza por C: Capital de Francia.", respuesta: "paris" },
-  { letra: "D", pregunta: "Con la D: Figura geométrica de cuatro lados iguales y ángulos rectos.", respuesta: "diamante" },
+  { letra: "C", pregunta: "Con la C: Donde te encanta meter el brazo", respuesta: "culo" },
+  { letra: "D", pregunta: "Con la D: En qué juego no le tenías fe a Markel y él lo consiguió", respuesta: "Dardos" },
   { letra: "E", pregunta: "Empieza por E: Estrella alrededor de la cual gira la Tierra.", respuesta: "estrella" },
-  { letra: "F", pregunta: "Contiene la F: Aparato que sirve para conservar alimentos fríos.", respuesta: "frigorifico" },
+  { letra: "F", pregunta: "Con la F: Comido que descubrió Endika por nosotros", respuesta: "Fideuá" },
   { letra: "G", pregunta: "Empieza por G: Ave de corral que da huevos.", respuesta: "gallina" },
   { letra: "H", pregunta: "Empieza por H: Planta con la que se hace el aceite de oliva.", respuesta: "higuera" },
   { letra: "I", pregunta: "Contiene la I: Piedra preciosa transparente formada por carbono puro.", respuesta: "diamante" },
   { letra: "J", pregunta: "Empieza por J: Prenda de vestir de tela vaquera.", respuesta: "jeans" },
   { letra: "K", pregunta: "Contiene la K: Deporte de combate de origen japonés.", respuesta: "karate" },
   { letra: "L", pregunta: "Empieza por L: Satélite natural de la Tierra.", respuesta: "luna" },
-  { letra: "M", pregunta: "Empieza por M: Rey de la selva.", respuesta: "leon" },
+  { letra: "M", pregunta: "Con la M: Lugar donde descubrimnos que es mejor no darte un hacha", respuesta: "Max Center" },
   { letra: "N", pregunta: "Termina en N: Estación del año más fría.", respuesta: "invierno" },
   { letra: "Ñ", pregunta: "Contiene la Ñ: Animal de granja que se usa para producir lana.", respuesta: "oveja" },
   { letra: "O", pregunta: "Empieza por O: Fruto amarillo y curvado, alimento preferido de los monos.", respuesta: "platano" },
-  { letra: "P", pregunta: "Empieza por P: Capital de España.", respuesta: "madrid" },
-  { letra: "Q", pregunta: "Contiene la Q: Producto lácteo elaborado a partir de leche cuajada.", respuesta: "queso" },
-  { letra: "R", pregunta: "Empieza por R: Fenómeno óptico y meteorológico con forma de arco de colores.", respuesta: "arcoiris" },
-  { letra: "S", pregunta: "Empieza por S: Estrella que ilumina la Tierra de día.", respuesta: "sol" },
-  { letra: "T", pregunta: "Empieza por T: Aparato electrónico para ver programas y películas.", respuesta: "televisor" },
-  { letra: "U", pregunta: "Contiene la U: Conjunto de todo lo que existe, planetas, estrellas y galaxias.", respuesta: "universo" },
-  { letra: "V", pregunta: "Empieza por V: Medio de transporte con dos ruedas que se mueve pedaleando.", respuesta: "bicicleta" },
-  { letra: "W", pregunta: "Contiene la W: Red informática mundial, se abrevia WWW.", respuesta: "web" },
-  { letra: "X", pregunta: "Contiene la X: Instrumento musical de percusión con láminas de madera.", respuesta: "xilofono" },
-  { letra: "Y", pregunta: "Contiene la Y: Metal precioso de color amarillo.", respuesta: "oro" },
-  { letra: "Z", pregunta: "Empieza por Z: Lugar donde se exhiben animales para el público.", respuesta: "zoo" }
+  { letra: "P", pregunta: "Empieza por P: Es el regalo de tu cumpleaños🫢", respuesta: "madrid" },
 ];
 
 let indiceActual = 0;
