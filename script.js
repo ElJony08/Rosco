@@ -12,7 +12,7 @@ const preguntas = [
   { letra: "H", pregunta: "Contiene la H: A Markel y a ti se os quedaba pegada en Torrevieja, a veces demasiado", respuesta: "almohada" },
   { letra: "I", pregunta: "Contiene la I: El proceso de subir el alimento para masticarlo otra vez", respuesta: "rumiar" },
   { letra: "J", pregunta: "Con la J: El vigilante del armero", respuesta: "Jabalí" },
-  { letra: "K", pregunta: "Con la K: No sabemos cómo haces para quedar siempre arriba en el", respuesta: "ranking" },
+  { letra: "K", pregunta: "Contiene la K: No sabemos cómo haces para quedar siempre arriba en el", respuesta: "ranking" },
   { letra: "L", pregunta: "Con la L: Quién le pidió el móvil a Markel para llamar a quién", respuesta: "Luis" },
   { letra: "M", pregunta: "Con la M: Lugar donde descubrimnos que es mejor no darte un hacha", respuesta: "Max Center" },
   { letra: "N", pregunta: "Con la N: El examen que se le hace a un aniamal despues de morir para determinar la causa de la muerte", respuesta: "Necropsia" },
