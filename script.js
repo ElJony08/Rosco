@@ -19,11 +19,22 @@ const preguntas = [
   { letra: "Ñ", pregunta: "Contiene la Ñ: Tocar tetas, pero a las vacas", respuesta: "ordeñar" },
   { letra: "O", pregunta: "Con la O: Por lo que pareces de otra raza", respuesta: "ojos" },
   { letra: "P", pregunta: "Con la P: Es el regalo de tu cumpleaños🫢", respuesta: "madrid" },
+  { letra: "Q", pregunta: "Con la Q: Producto lácteo elaborado a partir de leche cuajada", respuesta: "queso" },
+  { letra: "R", pregunta: "Con la R: Flor de tallo con espinas, símbolo del amor", respuesta: "rosa" },
+  { letra: "S", pregunta: "Con la S: Estrella que nos ilumina de día", respuesta: "sol" },
+  { letra: "T", pregunta: "Con la T: Aparato electrónico para ver programas y películas", respuesta: "televisor" },
+  { letra: "U", pregunta: "Con la U: Conjunto de todo lo que existe: planetas, estrellas y galaxias", respuesta: "universo" },
+  { letra: "V", pregunta: "Con la V: Animal doméstico que da leche y hace 'muu'", respuesta: "vaca" },
+  { letra: "W", pregunta: "Contiene la W: Red informática mundial, se abrevia WWW", respuesta: "web" },
+  { letra: "X", pregunta: "Con la X: Instrumento musical de percusión con láminas de madera", respuesta: "xilofono" },
+  { letra: "Y", pregunta: "Contiene la Y: Alimento lácteo fermentado que se suele desayunar", respuesta: "yogur" },
+  { letra: "Z", pregunta: "Con la Z: Lugar donde se exhiben animales para el público", respuesta: "zoo" },
 ];
 
 let indiceActual = 0;
 let aciertos = 0;
 let fallos = 0;
+let temporizadorRevelacion = null;
 
 const roscoEl = document.getElementById("rosco");
 const preguntaEl = document.getElementById("pregunta");
@@ -48,30 +59,15 @@ function normalizar(texto) {
 }
 
 // ---------------------------------------------------------
-// Calcula el tamaño del rosco según el ancho de pantalla,
-// para que se vea bien tanto en móvil como en escritorio.
-// ---------------------------------------------------------
-function calcularTamanoRosco() {
-  const anchoDisponible = Math.min(window.innerWidth * 0.92, 420);
-  const tamano = Math.max(anchoDisponible, 260); // nunca demasiado pequeño
-
-  const tamanoLetra = tamano < 320 ? 32 : (tamano < 380 ? 38 : 42);
-
-  document.documentElement.style.setProperty("--rosco-size", tamano + "px");
-  document.documentElement.style.setProperty("--letra-size", tamanoLetra + "px");
-
-  return { tamano, tamanoLetra };
-}
-
-// ---------------------------------------------------------
-// Genera el rosco de letras colocadas en círculo
+// Genera el rosco de letras colocadas en círculo.
+// Las posiciones se calculan en PORCENTAJE del contenedor,
+// no en píxeles fijos, así el círculo se adapta solo a
+// cualquier tamaño de pantalla (móvil incluido).
 // ---------------------------------------------------------
 function generarRosco() {
   const total = preguntas.length;
-  const { tamano, tamanoLetra } = calcularTamanoRosco();
-  const centro = tamano / 2;
-  // el radio deja hueco suficiente para que la letra no se salga del círculo
-  const radio = centro - tamanoLetra / 2 - 4;
+  const centro = 50; // % del contenedor
+  const radio = 43;  // % — deja margen para que la letra no se salga
 
   preguntas.forEach((item, i) => {
     const angulo = (i / total) * 2 * Math.PI - Math.PI / 2; // empieza arriba
@@ -81,41 +77,13 @@ function generarRosco() {
     const div = document.createElement("div");
     div.classList.add("letra");
     div.id = "letra-" + i;
-    div.style.left = x + "px";
-    div.style.top = y + "px";
+    div.style.left = x + "%";
+    div.style.top = y + "%";
     div.textContent = item.letra;
 
     roscoEl.appendChild(div);
   });
 }
-
-// ---------------------------------------------------------
-// Recoloca las letras si cambia el tamaño de pantalla
-// (por ejemplo al girar el móvil)
-// ---------------------------------------------------------
-function reposicionarRosco() {
-  const total = preguntas.length;
-  const { tamano, tamanoLetra } = calcularTamanoRosco();
-  const centro = tamano / 2;
-  const radio = centro - tamanoLetra / 2 - 4;
-
-  for (let i = 0; i < total; i++) {
-    const angulo = (i / total) * 2 * Math.PI - Math.PI / 2;
-    const x = centro + radio * Math.cos(angulo);
-    const y = centro + radio * Math.sin(angulo);
-    const el = document.getElementById("letra-" + i);
-    if (el) {
-      el.style.left = x + "px";
-      el.style.top = y + "px";
-    }
-  }
-}
-
-let resizeTimeout;
-window.addEventListener("resize", () => {
-  clearTimeout(resizeTimeout);
-  resizeTimeout = setTimeout(reposicionarRosco, 150);
-});
 
 // ---------------------------------------------------------
 // Marca visualmente la letra actual
@@ -136,6 +104,32 @@ function mostrarPregunta() {
   mensajeEl.className = "mensaje";
   actualizarLetraActual();
   respuestaEl.focus();
+
+  // La revelación va ligada SIEMPRE a la letra P (no a la última
+  // pregunta del rosco), así el jugador no se lo espera aunque
+  // el rosco completo llegue hasta la Z.
+  const esLaP = preguntas[indiceActual].letra === "P";
+  if (esLaP) {
+    programarRevelacion();
+  }
+}
+
+// ---------------------------------------------------------
+// Programa (o reprograma) el difuminado a los 5 segundos
+// ---------------------------------------------------------
+function programarRevelacion() {
+  cancelarRevelacion();
+  temporizadorRevelacion = setTimeout(() => {
+    document.body.classList.add("difuminado");
+  }, 5000);
+}
+
+function cancelarRevelacion() {
+  if (temporizadorRevelacion) {
+    clearTimeout(temporizadorRevelacion);
+    temporizadorRevelacion = null;
+  }
+  document.body.classList.remove("difuminado");
 }
 
 // ---------------------------------------------------------
@@ -219,6 +213,7 @@ function reiniciarJuego() {
   actualizarMarcador();
   document.querySelectorAll(".letra").forEach(el => el.classList.remove("correcta", "actual"));
   pantallaFinal.classList.add("oculto");
+  cancelarRevelacion();
   mostrarPregunta();
 }
 

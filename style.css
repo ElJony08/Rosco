@@ -107,22 +107,24 @@ h1 {
 }
 
 /* ---------- ROSCO ---------- */
-/* El tamaño se controla por variable --rosco-size, calculada en JS
-   según el ancho de pantalla disponible, para que las letras
-   siempre queden bien colocadas en el círculo. */
+/* El tamaño se calcula solo con CSS (min de ancho, alto y un máximo
+   fijo), así se adapta a cualquier pantalla sin depender de cálculos
+   en JS. Las letras se posicionan con JS pero en PORCENTAJE del
+   contenedor, no en píxeles, por lo que escalan automáticamente. */
 
 .rosco {
   position: relative;
-  width: var(--rosco-size, 420px);
-  height: var(--rosco-size, 420px);
+  width: min(88vw, 62vh, 420px);
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
+  margin: 0 auto;
   flex-shrink: 0;
 }
 
 .letra {
   position: absolute;
-  width: var(--letra-size, 42px);
-  height: var(--letra-size, 42px);
+  width: clamp(26px, 9.5vmin, 42px);
+  height: clamp(26px, 9.5vmin, 42px);
   border-radius: 50%;
   background: #2b2f3a;
   border: 2px solid #4a4f5e;
@@ -130,7 +132,7 @@ h1 {
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  font-size: clamp(11px, 3.4vw, 16px);
+  font-size: clamp(11px, 3.6vmin, 16px);
   color: #ffffff;
   transform: translate(-50%, -50%);
   transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
@@ -292,4 +294,42 @@ h1 {
 
 #reiniciar:hover {
   background: #ffe14d;
+}
+
+/* ---------- REVELACIÓN FINAL (pregunta P) ---------- */
+
+.difuminado #juego {
+  filter: blur(14px);
+  transition: filter 1.2s ease;
+  pointer-events: none;
+  user-select: none;
+}
+
+.capa-revelacion {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.2s ease;
+  background: rgba(9, 10, 15, 0.35);
+}
+
+.difuminado .capa-revelacion {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.capa-revelacion p {
+  margin: 0;
+  color: #ffd400;
+  font-size: clamp(24px, 6vw, 42px);
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-align: center;
+  text-shadow: 0 0 18px rgba(255, 212, 0, 0.6);
+  padding: 0 20px;
 }
