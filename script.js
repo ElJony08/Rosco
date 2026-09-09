@@ -16,8 +16,8 @@ const preguntas = [
   { letra: "L", pregunta: "Con la L: Quién le pidió el móvil a Markel para llamar a quién", respuesta: "Luis" },
   { letra: "M", pregunta: "Con la M: Lugar donde descubrimnos que es mejor no darte un hacha", respuesta: "Max Center" },
   { letra: "N", pregunta: "Termina en N: El examen que se le hace a un aniamal despues de morir para determinar la causa de la muerte", respuesta: "Necropsia" },
-  { letra: "Ñ", pregunta: "Contiene la Ñ: Animal de granja que se usa para producir lana.", respuesta: "oveja" },
-  { letra: "O", pregunta: "Con la O: Tocar tetas, pero a las vacas", respuesta: "ordeñar" },
+  { letra: "Ñ", pregunta: "Contiene la Ñ: Tocar tetas, pero a las vacas", respuesta: "ordeñar" },
+  { letra: "O", pregunta: "Con la O: Por lo que pareces de otra raza", respuesta: "ojos" },
   { letra: "P", pregunta: "Empieza por P: Es el regalo de tu cumpleaños🫢", respuesta: "madrid" },
 ];
 
